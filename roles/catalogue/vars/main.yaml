@@ -1,1 +1,1 @@
-MONGODB_HOST: mongodb.harshavn24.site
+MONGODB_HOST: "mongodb-{{ env }}.harshavn24.site"

@@ -19,7 +19,7 @@
     state: present
 
 - name: check products loaded or not
-  ansible.builtin.command: mongosh --host mongodb.harshavn24.site --eval 'db.catalogue.products.count()'
+  ansible.builtin.command: mongosh --host {{ MONGODB_HOST }} --eval 'db.catalogue.products.count()'
   register: catalogue_output
   # ignore_errors: true
   # ignore_unreachable: true
@@ -31,7 +31,7 @@
   # ignore_unreachable: true
 
 - name: load products
-  ansible.builtin.shell: mongosh --host mongodb.harshavn24.site < /app/db/master-data.js
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} < /app/db/master-data.js
   when: catalogue_output.stdout_lines[-1] | int == 0
 
   # ignore_errors: true
