@@ -1,0 +1,10 @@
+- name: Create /root/.my.cnf with MySQL root credentials
+  ansible.builtin.copy:
+    dest: /root/.my.cnf
+    content: |
+      [client]
+      user=root
+      password=RoboShop@1
+    owner: root
+    group: root
+    mode: '0600'

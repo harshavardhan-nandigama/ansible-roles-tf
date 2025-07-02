@@ -1,0 +1,1 @@
+MYSQL_ROOT_PASSWORD: "{ /ansible-role/roles/mysql/mysql_root_password, region='us-east-1',decrypt=False }"
