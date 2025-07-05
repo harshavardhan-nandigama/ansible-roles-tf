@@ -19,7 +19,7 @@
     state: present
 
 - name: check products loaded or not
-  ansible.builtin.command: mongosh --host {{ MONGODB_HOST }} --eval 'db.catalogue.products.count()'
+  ansible.builtin.command: mongosh --host {{ MONGODB_HOST }} --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
   register: catalogue_output
   # ignore_errors: true
   # ignore_unreachable: true
@@ -32,8 +32,7 @@
 
 - name: load products
   ansible.builtin.shell: mongosh --host {{ MONGODB_HOST }} < /app/db/master-data.js
-  when: catalogue_output.stdout_lines[-1] | int == 0
-
+  when: catalogue_output.stdout | int < 0
   # ignore_errors: true
   # ignore_unreachable: true
 
@@ -42,13 +41,9 @@
     name: common
     tasks_from: systemd.yaml
 
-
-# - name: deployment
+# - name: Deployment
 #   tags: 
 #   - deployment
-#   include_role:  
+#   import_role:
 #     name: common
 #     tasks_from: deployment
-
-
-

@@ -1,2 +1,2 @@
-CATALOGUE_HOST: catalogue.harshavn24.site
-REDIS_HOST: redis.harshavn24.site
+CATALOGUE_HOST: catalogue.backend-{{ env }}.harshavn24.site
+REDIS_HOST: redis-{{ env }}.harshavn24.site
